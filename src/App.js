@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes  , Route } from "react-router-dom";
+import Home from "./components/home";
+
+import Contact from "./components/contact";
+import Services from "./components/services";
+import { useState } from "react";
+import Themecontex from "./contex";
+
 
 function App() {
+   
+
+  const [Islight,setIslight] =useState(true)
+
+  const changetheme =()=>{
+    setIslight((prevState)=>{
+    return!prevState
+  })
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Themecontex.Provider value={{Islight ,changetheme}} >
+    <Routes>
+      <Route path="/" element ={ <Home />} />
+      <Route path="/contact"  element= {<Contact />} />
+      <Route path="/services"  element= {<Services />} />
+    </Routes>
+    </Themecontex.Provider>
   );
 }
 
